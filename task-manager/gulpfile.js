@@ -17,7 +17,10 @@ var gulp = require("gulp"),
 var folder = {
     src: "src/", // source files
     dist: "dist/", // build files
-    dist_assets: "dist/assets/" //build assets files
+    dist_assets: "dist/assets/", //build assets files
+    src_scss_megacode : "src/scss/megacode/",
+    src_js_authentication: "src/js/authentication/",
+    dist_assests_js_megacode : "dist/assets/js/"
 };
 
 /*
@@ -193,6 +196,7 @@ function html() {
     return gulp
         .src([
             folder.src + "html/*.html",
+            folder.src + "html/partials/*.html",
             folder.src + "html/*.ico", // favicons
             folder.src + "html/*.png"
         ])
@@ -206,6 +210,36 @@ function html() {
 
 // compile & minify sass
 function css() {
+    
+    // Gulp for scss megacode
+
+    var arraySass = [
+        folder.src_scss_megacode+"principal-page.scss",
+        folder.src_scss_megacode+"authentication-page.scss"
+    ];
+
+    gulp.src(arraySass)
+        .pipe(sourcemaps.init())
+        .pipe(sass()) // scss to css
+        .pipe(
+            autoprefixer({
+                overrideBrowserslist: ["last 2 versions"]
+            })
+        )
+        .pipe(gulp.dest(folder.dist_assets + "css/"))
+        .pipe(cleanCSS())
+        .pipe(
+            rename({
+                // rename app.css to icons.min.css
+                suffix: ".min"
+            })
+        )
+        .pipe(sourcemaps.write("./")) // source maps for icons.min.css
+        .pipe(gulp.dest(folder.dist_assets + "css/"));
+
+        
+    // Gulp for scss megacode
+
     gulp
 	.src([folder.src + "/scss/bootstrap.scss"])
         .pipe(sourcemaps.init())
@@ -334,6 +368,23 @@ function javascript() {
         .pipe(gulp.dest(out + "pages"));
     });
 
+    var arrayJsMegacode = [
+         {
+             file: folder.src_js_authentication+"login.js",
+             dest_path: folder.dist_assests_js_megacode+"authentication/"
+         }
+    ];
+
+
+    arrayJsMegacode.forEach(function (json) {
+        gulp.src(json.file)
+        .pipe(uglify())
+        .on("error", function (err) {
+            gutil.log(gutil.colors.red("[Error]"), err.toString());
+        })
+        .pipe(gulp.dest(json.dest_path));
+    });
+
     // It's important to keep files at this order
     // so that `app.min.js` can be executed properly
     gulp
@@ -344,7 +395,7 @@ function javascript() {
             folder.src + "js/vendor/metisMenu.js",
             folder.src + "js/vendor/waves.js",
             folder.src + "js/vendor/jquery.waypoints.min.js",
-            folder.src + "js/vendor/jquery.counterup.min.js"
+            folder.src + "js/vendor/jquery.counterup.min.js",
         ])
         .pipe(sourcemaps.init())
         .pipe(concat("vendor.js"))

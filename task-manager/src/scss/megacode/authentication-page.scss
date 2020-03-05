@@ -1,0 +1,66 @@
+@import "variables_megacode";
+
+.login-btn{
+    background-color: $primary-color-megacode;
+    border-color: $border-color-megacode;
+
+    &:hover{
+        border-color: $primary-color-megacode;
+    }
+}
+
+.register-btn{
+    background-color: $secondary-color-megacode;
+    border-color: $border-color-megacode;
+
+    &:hover{
+        border-color: $secondary-color-megacode;
+    }
+}
+
+.statics-login {
+    display: block;
+    text-indent: -9999px;
+    width: 100%;
+    height: 100%;
+    background: url("../images/task-manager/Computer.svg") no-repeat;
+    background-size: 100% 100%;
+}
+
+.container-image-bottom-rigth{
+    width: 14%;
+    height: 20%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1000;
+
+    @media screen and (max-width: $max-width-phone) {
+        display: none;
+    }
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #2c4e83;
+    border-color: #ffffff solid 1px;
+    background-color: #2c4e83;
+}
+
+.custom-control-label::before {
+    position: absolute;
+    top: .175rem;
+    left: -1.5rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    content: "";
+    background-color: #3b4452;
+    border: #FFFFFF solid 1px;
+}
+
+.logo-box{
+    height: 70px;
+    float: inherit;
+    padding-right: 0;
+}
