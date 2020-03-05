@@ -20,8 +20,35 @@ var folder = {
     dist_assets: "dist/assets/", //build assets files
     src_scss_megacode : "src/scss/megacode/",
     src_js_authentication: "src/js/authentication/",
-    dist_assests_js_megacode : "dist/assets/js/"
+    dist_assests_js_megacode : "dist/assets/js/",
+    src_html: "src/html/",
+    dist_html_megacode : "dist/html/"
 };
+
+var arrayHtml = [
+    {
+        file: folder.src_html+"authentication/*.html",
+        dest_path: folder.dist_html_megacode+"authentication/"
+    },
+    {
+        file: folder.src_html+"error/*.html",
+        dest_path: folder.dist_html_megacode+"error/"
+    },
+    {
+        file: folder.src_html+"partials/*.html",
+        dest_path: folder.dist_html_megacode+"partials/"
+    }
+]
+var arraySass = [
+    folder.src_scss_megacode+"*.scss"
+];
+
+var arrayJsMegacode = [
+    {
+        file: folder.src_js_authentication+"*.js",
+        dest_path: folder.dist_assests_js_megacode+"authentication/"
+    }
+];
 
 /*
 Copy assets/vendors from their node_module package to scss & js folder
@@ -193,10 +220,22 @@ function fonts() {
 function html() {
     var out = folder.dist;
 
+    arrayHtml.forEach(function(json){
+        gulp
+        .src([
+            json.file
+        ])
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file',
+            indent: true
+        }))
+        .pipe(gulp.dest(json.dest_path));
+    });
+    
     return gulp
         .src([
             folder.src + "html/*.html",
-            folder.src + "html/partials/*.html",
             folder.src + "html/*.ico", // favicons
             folder.src + "html/*.png"
         ])
@@ -212,11 +251,6 @@ function html() {
 function css() {
     
     // Gulp for scss megacode
-
-    var arraySass = [
-        folder.src_scss_megacode+"principal-page.scss",
-        folder.src_scss_megacode+"authentication-page.scss"
-    ];
 
     gulp.src(arraySass)
         .pipe(sourcemaps.init())
@@ -367,14 +401,6 @@ function javascript() {
         })
         .pipe(gulp.dest(out + "pages"));
     });
-
-    var arrayJsMegacode = [
-         {
-             file: folder.src_js_authentication+"login.js",
-             dest_path: folder.dist_assests_js_megacode+"authentication/"
-         }
-    ];
-
 
     arrayJsMegacode.forEach(function (json) {
         gulp.src(json.file)
