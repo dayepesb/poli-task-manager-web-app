@@ -6,6 +6,8 @@ Contact: support@coderthemes.com
 File: Main Js File
 */
 
+var WITH_SERVICES = false;
+var IS_PROD = false;
 
 !function ($) {
     "use strict";

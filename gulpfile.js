@@ -10,6 +10,7 @@ var gulp = require("gulp"),
     rename = require("gulp-rename"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
+    gutil = require('gulp-util'),
     lodash = require("lodash"),
     browsersync = require("browser-sync"),
     fileinclude = require('gulp-file-include');
@@ -22,7 +23,8 @@ var folder = {
     src_js_authentication: "src/js/authentication/",
     dist_assests_js_megacode : "dist/assets/js/",
     src_html: "src/html/",
-    dist_html_megacode : "dist/html/"
+    dist_html_megacode : "dist/html/",
+    src_js: "src/js/"
 };
 
 var arrayHtml = [
@@ -37,6 +39,10 @@ var arrayHtml = [
     {
         file: folder.src_html+"partials/*.html",
         dest_path: folder.dist_html_megacode+"partials/"
+    },
+    {
+        file: folder.src_html+"principal-user-page/*.html",
+        dest_path: folder.dist_html_megacode+"principal-user-page/"
     }
 ]
 var arraySass = [
@@ -47,6 +53,18 @@ var arrayJsMegacode = [
     {
         file: folder.src_js_authentication+"*.js",
         dest_path: folder.dist_assests_js_megacode+"authentication/"
+    },
+    {
+        file: folder.src_js+"megacode-tag/*.js",
+        dest_path: folder.dist_assests_js_megacode+"megacode-tag/"
+    },
+    {
+        file: folder.src_js+"service/*.js",
+        dest_path: folder.dist_assests_js_megacode+"service/"
+    },
+    {
+        file: folder.src_js+"constants/*.js",
+        dest_path: folder.dist_assests_js_megacode+"constants/"
     }
 ];
 
