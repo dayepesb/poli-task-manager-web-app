@@ -9,6 +9,8 @@ File: Main Js File
 var WITH_SERVICES = false;
 var IS_PROD = false;
 
+var MegaCodeStorage = window.localStorage;
+
 !function ($) {
     "use strict";
 
