@@ -5,17 +5,18 @@ function login(){
     var email = $("#emailaddress").val();
     var password = $("#password").val();
 
-    var response = loginService(email, password);
-
-    if(response.error){
-        console.log(response);
-    }else{
-        var content = response.content;
-        MegaCodeStorage.setItem(STORAGE.KEY_TOKEN_MEGACODE_STORAGE,content.token);
-        MegaCodeStorage.setItem(STORAGE.KEY_PROFILE_NAME_MEGACODE_STORAGE,content.name);
-        MegaCodeStorage.setItem(STORAGE.KEY_IMAGE_B64_MEGACODE_STORAGE,content.image_b64);
-
-        redirectPrincipalPageUser();
+    if(email != null && email!=undefined && email != "" && password != null && password != undefined && password != ""){
+        var response = loginService(email, password);
+        if(response.error){
+            errorMessage("Error",response.message);
+        }else{
+            var content = response.content;
+            MegaCodeStorage.setItem(STORAGE.KEY_TOKEN_MEGACODE_STORAGE,content.token);
+            MegaCodeStorage.setItem(STORAGE.KEY_PROFILE_NAME_MEGACODE_STORAGE,content.name);
+            MegaCodeStorage.setItem(STORAGE.KEY_IMAGE_B64_MEGACODE_STORAGE,content.image_b64);
+    
+            redirectPrincipalPageUser();
+        }
     }
 }
 
