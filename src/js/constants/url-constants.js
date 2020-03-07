@@ -1,3 +1,4 @@
 var authenticationUrl = {
-    login : ""
-};
+    login : "",
+    validateToken: ""
+}

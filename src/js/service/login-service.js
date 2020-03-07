@@ -8,9 +8,9 @@ function loginService(email, password){
          * Falta consumir el servicio de login, la firma de aca abajo esta aproada y no se puede cambiar
          */
         return null;
-        
+
     }else{
-        if(email == CONSTANT_WITHOUT_SERVICES.EMAIL_TEST_LOGIN && password == CONSTANT_WITHOUT_SERVICES.PASSWORD_LOGIN){
+        if(email == CONSTANT_WITHOUT_SERVICES.EMAIL_LOGIN && password == CONSTANT_WITHOUT_SERVICES.PASSWORD_LOGIN){
             return {
                 error: false,
                 message: CONSTANT_WITHOUT_SERVICES.MESSAGE_LOGIN_SUCCESS,
@@ -25,6 +25,27 @@ function loginService(email, password){
                 error: true,
                 message: CONSTANT_WITHOUT_SERVICES.MESSAGE_LOGIN_ERROR
             }
+        }
+    }
+}
+
+function autoLoginService(token){
+    if(WITH_SERVICES){
+        var url = authenticationUrl.validateToken
+        /**
+         * Consumir servicio para validar el token que esta guardado en session
+         */
+    }else{
+        if(token==CONSTANT_WITHOUT_SERVICES.TOKEN_LOGIN){
+            return {
+                error: false,
+                message: CONSTANT_WITHOUT_SERVICES.MESSAGE_LOGIN_SUCCESS
+            }
+        }
+
+        return {
+            error: true,
+            message: CONSTANT_WITHOUT_SERVICES.MESSAGE_LOGIN_ERROR
         }
     }
 }

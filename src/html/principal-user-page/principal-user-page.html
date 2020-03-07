@@ -22,11 +22,6 @@
 
         <!--Login css-->
         <link href="../../assets/css/principal-page.css" rel="stylesheet" />
-
-        <script>
-            let eof = false;
-            console.log("!!!");
-        </script>
     </head>
 
     <body>
@@ -34,7 +29,7 @@
         <!-- Navigation Bar-->
         <header id="topnav">
 
-        
+        <img id ="img_user">
 
         </header>
         <!-- End Navigation Bar-->
@@ -43,7 +38,7 @@
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
         
-        User logged
+        
 
 
         <!-- ============================================================== -->
@@ -67,6 +62,11 @@
 
         <!-- App js-->
         <script src="../../assets/js/app.min.js"></script>
+
+        <script>
+            var image = MegaCodeStorage.getItem("megacode.profile.image");
+            document.getElementById("img_user").src = image;
+        </script>
         
     </body>
 </html>

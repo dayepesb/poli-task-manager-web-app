@@ -1,5 +1,3 @@
-loadScript("../../assets/js/constants/constant.js");
-loadScript("../../assets/js/service/login-service.js");
 
 function login(){
     var email = $("#emailaddress").val();
